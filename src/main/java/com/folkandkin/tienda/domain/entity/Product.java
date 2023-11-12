@@ -51,4 +51,7 @@ public class Product implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "categoria_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"producto_id", "categoria_id"}))
     private List<Category> categories;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<ColorProduct> colorProducts;
 }
