@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Clase de objeto de dominio Producto.
@@ -39,4 +41,7 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tienda_id", nullable = false)
     private Store store;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<Photo> photos;
 }
