@@ -44,4 +44,11 @@ public class Product implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     private List<Photo> photos;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "categorias_productos",
+            joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"producto_id", "categoria_id"}))
+    private List<Category> categories;
 }
