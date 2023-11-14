@@ -9,17 +9,17 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Clase de objeto de dominio Color.
+ * Clase de objeto de dominio Talle.
  *
- * @version v1 12 Nov 2023
+ * @version v1 14 Nov 2023
  * @author Leandro Deferrari
  */
 
 @Entity
 @Getter
 @Setter
-@Table(name = "colores")
-public class Color implements Serializable {
+@Table(name = "talles")
+public class Size implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,9 +28,10 @@ public class Color implements Serializable {
     @Column(length = 20, name = "nombre", nullable = false, unique = true)
     private String name;
 
-    @Column(length = 7, name = "codigo_hexadecimal", nullable = false, unique = true)
-    private String hexadecimalCode;
+    @ManyToOne
+    @JoinColumn(name = "estandar_id", nullable = false)
+    private StandardSize standard;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "color")
-    private List<ColorProduct> products;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "size")
+    private List<SizeProduct> products;
 }

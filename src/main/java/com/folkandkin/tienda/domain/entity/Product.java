@@ -53,5 +53,8 @@ public class Product implements Serializable {
     private List<Category> categories;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private List<ColorProduct> colorProducts;
+    private List<ColorProduct> colors;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<SizeProduct> sizes;
 }
