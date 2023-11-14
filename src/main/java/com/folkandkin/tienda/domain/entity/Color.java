@@ -32,5 +32,5 @@ public class Color implements Serializable {
     private String hexadecimalCode;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "color")
-    private List<ColorProduct> colorProducts;
+    private List<ColorProduct> products;
 }
