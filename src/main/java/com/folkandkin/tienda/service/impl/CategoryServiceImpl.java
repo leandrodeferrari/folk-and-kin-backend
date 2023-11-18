@@ -1,7 +1,9 @@
 package com.folkandkin.tienda.service.impl;
 
 import com.folkandkin.tienda.dto.mapper.ICategoryMapper;
+import com.folkandkin.tienda.dto.request.CategoryRequest;
 import com.folkandkin.tienda.dto.response.CategoryResponse;
+import com.folkandkin.tienda.exception.CategoryNotNullException;
 import com.folkandkin.tienda.repository.ICategoryRepository;
 import com.folkandkin.tienda.service.ICategoryService;
 
@@ -31,5 +33,15 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<CategoryResponse> findAll() {
         return this.categoryMapper.mapToDto(this.categoryRepository.findAll());
+    }
+
+    @Transactional
+    @Override
+    public CategoryResponse save(CategoryRequest request) {
+        if(request == null){
+            throw new CategoryNotNullException("La solicitud no puede ser nula.");
+        }
+
+        return this.categoryMapper.mapToDto(this.categoryRepository.save(this.categoryMapper.mapToEntity(request)));
     }
 }

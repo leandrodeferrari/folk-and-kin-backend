@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.service;
 
+import com.folkandkin.tienda.dto.request.CategoryRequest;
 import com.folkandkin.tienda.dto.response.CategoryResponse;
 
 import java.util.List;
@@ -13,4 +14,5 @@ import java.util.List;
 
 public interface ICategoryService {
     List<CategoryResponse> findAll();
+    CategoryResponse save(CategoryRequest request);
 }
