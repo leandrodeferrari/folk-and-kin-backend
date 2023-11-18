@@ -2,6 +2,7 @@ package com.folkandkin.tienda.exception.handler;
 
 import com.folkandkin.tienda.dto.response.ExceptionResponse;
 
+import com.folkandkin.tienda.exception.CategoryNotNullException;
 import com.folkandkin.tienda.exception.EmailNotFoundException;
 import com.folkandkin.tienda.exception.PasswordNotMatchException;
 import com.folkandkin.tienda.exception.RoleNameNotNullException;
@@ -121,6 +122,17 @@ public class ApiControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse emailNotFoundException(EmailNotFoundException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse categoryNameNotNullException(CategoryNotNullException ex){
         return new ExceptionResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 ex.getMessage(),
