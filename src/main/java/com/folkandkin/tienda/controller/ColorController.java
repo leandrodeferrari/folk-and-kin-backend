@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.controller;
 
+import com.folkandkin.tienda.dto.request.ColorRequest;
 import com.folkandkin.tienda.dto.response.ColorResponse;
 import com.folkandkin.tienda.service.IColorService;
 
@@ -7,9 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -35,5 +36,11 @@ public class ColorController {
     @GetMapping
     public ResponseEntity<List<ColorResponse>> findAll(){
         return ResponseEntity.ok().body(this.colorService.findAll());
+    }
+
+    @Operation(description = "Crear un color. Rol: ADMIN. Parámetros: String name, String hexadecimalCode.")
+    @PostMapping
+    public ResponseEntity<ColorResponse> save(@Valid @RequestBody ColorRequest request){
+        return ResponseEntity.ok().body(this.colorService.save(request));
     }
 }

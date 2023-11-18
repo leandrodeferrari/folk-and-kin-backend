@@ -1,6 +1,7 @@
 package com.folkandkin.tienda.dto.mapper;
 
 import com.folkandkin.tienda.domain.entity.Color;
+import com.folkandkin.tienda.dto.request.ColorRequest;
 import com.folkandkin.tienda.dto.response.ColorResponse;
 
 import org.mapstruct.Mapper;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IColorMapper {
+    Color mapToEntity(ColorRequest dto);
     ColorResponse mapToDto(Color entity);
     List<ColorResponse> mapToDto(List<Color> entities);
 }
