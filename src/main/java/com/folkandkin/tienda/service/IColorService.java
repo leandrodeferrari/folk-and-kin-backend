@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.service;
 
+import com.folkandkin.tienda.dto.request.ColorRequest;
 import com.folkandkin.tienda.dto.response.ColorResponse;
 
 import java.util.List;
@@ -13,4 +14,5 @@ import java.util.List;
 
 public interface IColorService {
     List<ColorResponse> findAll();
+    ColorResponse save(ColorRequest request);
 }

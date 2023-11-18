@@ -1,7 +1,9 @@
 package com.folkandkin.tienda.service.impl;
 
 import com.folkandkin.tienda.dto.mapper.IColorMapper;
+import com.folkandkin.tienda.dto.request.ColorRequest;
 import com.folkandkin.tienda.dto.response.ColorResponse;
+import com.folkandkin.tienda.exception.ColorNotNullException;
 import com.folkandkin.tienda.repository.IColorRepository;
 import com.folkandkin.tienda.service.IColorService;
 
@@ -31,5 +33,15 @@ public class IColorServiceImpl implements IColorService {
     @Override
     public List<ColorResponse> findAll() {
         return this.colorMapper.mapToDto(this.colorRepository.findAll());
+    }
+
+    @Transactional
+    @Override
+    public ColorResponse save(ColorRequest request) {
+        if(request == null){
+            throw new ColorNotNullException("La solicitud no puede ser nula.");
+        }
+
+        return this.colorMapper.mapToDto(this.colorRepository.save(this.colorMapper.mapToEntity(request)));
     }
 }
