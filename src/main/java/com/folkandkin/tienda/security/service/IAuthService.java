@@ -3,6 +3,7 @@ package com.folkandkin.tienda.security.service;
 import com.folkandkin.tienda.security.dto.request.LoginRequest;
 import com.folkandkin.tienda.security.dto.request.RegisterRequest;
 import com.folkandkin.tienda.security.dto.response.LoginResponse;
+import com.folkandkin.tienda.security.dto.response.LogoutResponse;
 import com.folkandkin.tienda.security.dto.response.RegisterResponse;
 
 /**
@@ -15,4 +16,5 @@ import com.folkandkin.tienda.security.dto.response.RegisterResponse;
 public interface IAuthService {
     LoginResponse login(LoginRequest request);
     RegisterResponse register(RegisterRequest request);
+    LogoutResponse logout();
 }
