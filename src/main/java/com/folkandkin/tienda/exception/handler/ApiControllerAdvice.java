@@ -2,10 +2,13 @@ package com.folkandkin.tienda.exception.handler;
 
 import com.folkandkin.tienda.dto.response.ExceptionResponse;
 
+import com.folkandkin.tienda.exception.PasswordNotMatchException;
 import com.folkandkin.tienda.exception.RoleNameNotNullException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +66,40 @@ public class ApiControllerAdvice {
         return new ExceptionResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse passwordNotMatchException(PasswordNotMatchException ex){
+        log.info("Ocurrio una validacion de Usuario: " + ex.getMessage());
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ExceptionResponse unauthorizedException(BadCredentialsException ex){
+        return new ExceptionResponse(
+                HttpStatus.UNAUTHORIZED.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ExceptionResponse accessDeniedException(AccessDeniedException ex){
+        return new ExceptionResponse(
+                HttpStatus.FORBIDDEN.value(),
+                "No tenes permisos para acceder a este recurso.",
                 null
         );
     }
