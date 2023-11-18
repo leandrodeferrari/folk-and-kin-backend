@@ -1,4 +1,4 @@
-package com.folkandkin.tienda.domain.enums;
+package com.folkandkin.tienda.security.domain.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

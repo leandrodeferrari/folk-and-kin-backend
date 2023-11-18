@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.domain.entity;
 
+import com.folkandkin.tienda.security.domain.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 

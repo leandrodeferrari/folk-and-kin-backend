@@ -1,6 +1,6 @@
-package com.folkandkin.tienda.repository;
+package com.folkandkin.tienda.security.repository;
 
-import com.folkandkin.tienda.domain.entity.User;
+import com.folkandkin.tienda.security.domain.entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
