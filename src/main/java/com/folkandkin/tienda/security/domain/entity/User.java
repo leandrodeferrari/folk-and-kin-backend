@@ -1,4 +1,4 @@
-package com.folkandkin.tienda.domain.entity;
+package com.folkandkin.tienda.security.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;
