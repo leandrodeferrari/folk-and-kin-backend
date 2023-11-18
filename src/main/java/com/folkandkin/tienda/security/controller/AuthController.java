@@ -3,6 +3,7 @@ package com.folkandkin.tienda.security.controller;
 import com.folkandkin.tienda.security.dto.request.LoginRequest;
 import com.folkandkin.tienda.security.dto.request.RegisterRequest;
 import com.folkandkin.tienda.security.dto.response.LoginResponse;
+import com.folkandkin.tienda.security.dto.response.LogoutResponse;
 import com.folkandkin.tienda.security.dto.response.RegisterResponse;
 import com.folkandkin.tienda.security.service.IAuthService;
 
@@ -45,5 +46,11 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> login(@Valid @RequestBody RegisterRequest request){
         return ResponseEntity.ok().body(this.authService.register(request));
+    }
+
+    @Operation(description = "Cerrar sesión del Usuario. Rol: Autenticado. Parámetros: Ninguno.")
+    @PostMapping("/logout")
+    public ResponseEntity<LogoutResponse> logout(){
+        return ResponseEntity.ok().body(this.authService.logout());
     }
 }

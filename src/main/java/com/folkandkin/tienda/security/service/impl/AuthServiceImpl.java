@@ -1,8 +1,10 @@
 package com.folkandkin.tienda.security.service.impl;
 
+import com.folkandkin.tienda.exception.EmailNotFoundException;
 import com.folkandkin.tienda.security.domain.entity.Role;
 import com.folkandkin.tienda.security.domain.entity.User;
 import com.folkandkin.tienda.security.domain.enums.RoleName;
+import com.folkandkin.tienda.security.dto.response.LogoutResponse;
 import com.folkandkin.tienda.security.repository.IUserRepository;
 import com.folkandkin.tienda.security.config.SecurityConfig;
 import com.folkandkin.tienda.security.domain.UserDetailsImpl;
@@ -17,8 +19,12 @@ import com.folkandkin.tienda.security.service.IRoleService;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Clase de objeto de negocio de Auth.
@@ -47,13 +53,19 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public LoginResponse login(LoginRequest request) {
-        this.authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        Optional<User> optional = this.userRepository.findByEmail(request.getEmail());
 
-        UserDetailsImpl userDetailsImpl = this.userDetailsServiceImpl.loadUserByUsername(request.getEmail());
+        if(optional.isPresent()){
+            this.authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
-        String token = jwtTokenProvider.generateToken(userDetailsImpl);
+            UserDetailsImpl userDetailsImpl = this.userDetailsServiceImpl.loadUserByUsername(request.getEmail());
 
-        return new LoginResponse(userDetailsImpl.getUsername(), token);
+            String token = jwtTokenProvider.generateToken(userDetailsImpl);
+
+            return new LoginResponse(userDetailsImpl.getUsername(), token);
+        } else {
+            throw new EmailNotFoundException("No existe usuario con el email ingresado.");
+        }
     }
 
     @Transactional
@@ -75,5 +87,17 @@ public class AuthServiceImpl implements IAuthService {
         response.setToken(loginResponse.getToken());
 
         return response;
+    }
+
+    @Override
+    public LogoutResponse logout() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null) {
+            SecurityContextHolder.getContext().setAuthentication(null);
+            return new LogoutResponse("Cierre de sesión exitoso.");
+        } else {
+            return new LogoutResponse("Ya se encontraba cerrada la sesión.");
+        }
     }
 }
