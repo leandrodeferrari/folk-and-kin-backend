@@ -1,6 +1,7 @@
 package com.folkandkin.tienda.domain.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * Enum de los nombres de los roles, de la clase de dominio Rol.
@@ -10,8 +11,9 @@ import lombok.AllArgsConstructor;
  */
 
 @AllArgsConstructor
+@Getter
 public enum RoleName {
-    ADMIN("ADMINISTRADOR");
+    ADMIN("ADMIN");
 
     private final String name;
 }

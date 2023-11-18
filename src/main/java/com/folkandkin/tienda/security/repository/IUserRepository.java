@@ -5,6 +5,8 @@ import com.folkandkin.tienda.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Clase de acceso a datos para el objeto de dominio Usuario.
  *
@@ -14,4 +16,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 }
