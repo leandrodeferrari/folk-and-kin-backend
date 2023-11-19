@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.service;
 
+import com.folkandkin.tienda.dto.request.SizeRequest;
 import com.folkandkin.tienda.dto.response.SizeResponse;
 
 import java.util.List;
@@ -13,4 +14,5 @@ import java.util.List;
 
 public interface ISizeService {
     List<SizeResponse> findAll();
+    SizeResponse save(SizeRequest request);
 }
