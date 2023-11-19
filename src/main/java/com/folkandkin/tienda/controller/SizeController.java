@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.controller;
 
+import com.folkandkin.tienda.dto.request.SizeRequest;
 import com.folkandkin.tienda.dto.response.SizeResponse;
 import com.folkandkin.tienda.service.ISizeService;
 
@@ -7,9 +8,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import java.util.List;
 
@@ -35,5 +36,11 @@ public class SizeController {
     @GetMapping
     public ResponseEntity<List<SizeResponse>> findAll(){
         return ResponseEntity.ok().body(this.sizeService.findAll());
+    }
+
+    @Operation(description = "Crear un talle. Rol: ADMIN. Parámetros: String name.")
+    @PostMapping
+    public ResponseEntity<SizeResponse> save(@Valid @RequestBody SizeRequest request){
+        return ResponseEntity.ok().body(this.sizeService.save(request));
     }
 }

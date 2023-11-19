@@ -1,6 +1,7 @@
 package com.folkandkin.tienda.dto.mapper;
 
 import com.folkandkin.tienda.domain.entity.Size;
+import com.folkandkin.tienda.dto.request.SizeRequest;
 import com.folkandkin.tienda.dto.response.SizeResponse;
 
 import org.mapstruct.Mapper;
@@ -17,6 +18,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ISizeMapper {
+    Size mapToEntity(SizeRequest dto);
+
     @Mapping(target = "standard", source = "entity.standard.name")
     SizeResponse mapToDto(Size entity);
 

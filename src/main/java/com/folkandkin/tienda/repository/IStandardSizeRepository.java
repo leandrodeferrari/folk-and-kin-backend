@@ -5,6 +5,8 @@ import com.folkandkin.tienda.domain.entity.StandardSize;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Clase de acceso a datos para el objeto de dominio Estandar de Talle.
  *
@@ -13,5 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface IStantardSizeRepository extends JpaRepository<StandardSize, Integer> {
+public interface IStandardSizeRepository extends JpaRepository<StandardSize, Integer> {
+    Optional<StandardSize> findByName(String name);
 }
