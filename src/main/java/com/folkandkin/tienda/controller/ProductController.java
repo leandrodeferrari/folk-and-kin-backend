@@ -37,7 +37,7 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> findAll(){
         return ResponseEntity.ok().body(this.productService.findAll());
     }
-
+  
     @Operation(description = "Obtener todos los productos de una tienda. Rol: ADMIN. Parámetros: StoreId (ID de la tienda, recibido por parámetro).")
     @GetMapping("/{storeId}")
     public ResponseEntity<List<ProductResponse>> findAllByStore(@PathVariable Long storeId){
