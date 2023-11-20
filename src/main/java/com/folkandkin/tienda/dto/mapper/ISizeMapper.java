@@ -23,6 +23,5 @@ public interface ISizeMapper {
     @Mapping(target = "standard", source = "entity.standard.name")
     SizeResponse mapToDto(Size entity);
 
-    @Mapping(target = "standard", ignore = true)
     List<SizeResponse> mapToDto(List<Size> entities);
 }
