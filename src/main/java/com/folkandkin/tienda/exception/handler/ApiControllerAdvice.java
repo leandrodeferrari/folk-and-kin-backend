@@ -172,6 +172,28 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler
     @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse idException(IdException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse storeNotFoundException(StoreNotFoundException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionResponse internalServerError(RuntimeException ex){
         Map<String, String> detail = new HashMap<>();

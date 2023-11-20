@@ -13,4 +13,5 @@ import java.util.List;
 
 public interface IProductService {
     List<ProductResponse> findAll();
+    List<ProductResponse> findAllByStoreId(Long storeId);
 }
