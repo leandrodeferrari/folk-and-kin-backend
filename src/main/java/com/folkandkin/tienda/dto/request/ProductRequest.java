@@ -2,6 +2,8 @@ package com.folkandkin.tienda.dto.request;
 
 import lombok.Data;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,11 +31,13 @@ public class ProductRequest {
     @Min(message = "El ID de la tienda no puede ser menor a 1.", value = 1)
     private Long storeId;
 
+    @NotNull(message = "Las fotos no pueden ser nulas.")
+    private List<MultipartFile> photos;
+
     @NotNull(message = "Los IDs de las categorías no pueden ser nulos.")
     private List<Integer> categoriesId;
 
-    private List<ColorProductRequest> colorsId;
+    private List<ColorProductRequest> colors;
 
-    private List<ColorProductRequest> sizesId;
-
+    private List<SizeProductRequest> sizes;
 }

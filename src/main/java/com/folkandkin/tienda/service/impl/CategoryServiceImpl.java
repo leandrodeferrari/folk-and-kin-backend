@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.service.impl;
 
+import com.folkandkin.tienda.domain.entity.Category;
 import com.folkandkin.tienda.dto.mapper.ICategoryMapper;
 import com.folkandkin.tienda.dto.request.CategoryRequest;
 import com.folkandkin.tienda.dto.response.CategoryResponse;
@@ -43,5 +44,11 @@ public class CategoryServiceImpl implements ICategoryService {
         }
 
         return this.categoryMapper.mapToDto(this.categoryRepository.save(this.categoryMapper.mapToEntity(request)));
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Category> findAllById(List<Integer> ids) {
+        return this.categoryRepository.findAllById(ids);
     }
 }

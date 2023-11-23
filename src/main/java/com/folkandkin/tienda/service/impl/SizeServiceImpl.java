@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Clase de objeto de negocio del objeto de dominio Talle.
@@ -60,5 +61,11 @@ public class SizeServiceImpl implements ISizeService {
         } else {
             throw new SizeExistsException("El talle ya existe.");
         }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Size> findById(Integer id) {
+        return this.sizeRepository.findById(id);
     }
 }

@@ -206,6 +206,28 @@ public class ApiControllerAdvice {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse photoIsEmptyException(PhotoIsEmptyException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse categoryIsEmptyException(CategoryIsEmptyException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse productNotFoundException(ProductNotFoundException ex){
         return new ExceptionResponse(
                 HttpStatus.BAD_REQUEST.value(),
