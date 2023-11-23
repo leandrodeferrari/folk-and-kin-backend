@@ -194,6 +194,54 @@ public class ApiControllerAdvice {
 
     @ExceptionHandler
     @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse urlException(URLException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse productNotFoundException(ProductNotFoundException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse categoryNotFoundException(CategoryNotFoundException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExceptionResponse cloudinaryException(CloudinaryException ex){
+        Map<String, String> detail = new HashMap<>();
+        detail.put("Clase", ex.getClass().getName());
+
+        log.info("Ocurrio un problema al guardar las fotos: " + ex.getMessage());
+        return new ExceptionResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                ex.getMessage(),
+                detail
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ExceptionResponse internalServerError(RuntimeException ex){
         Map<String, String> detail = new HashMap<>();

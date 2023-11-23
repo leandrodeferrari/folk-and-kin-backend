@@ -28,6 +28,6 @@ public class Photo implements Serializable {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false)
+    @JoinColumn(name = "producto_id")
     private Product product;
 }
