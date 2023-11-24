@@ -10,6 +10,7 @@ import com.folkandkin.tienda.security.service.IAuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +45,8 @@ public class AuthController {
 
     @Operation(description = "Registrar Usuario. Rol: Sin rol. Parámetros: String username, String email, String password, String phone (Opcional).")
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> login(@Valid @RequestBody RegisterRequest request){
-        return ResponseEntity.ok().body(this.authService.register(request));
+    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request){
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.authService.register(request));
     }
 
     @Operation(description = "Cerrar sesión del Usuario. Rol: Autenticado. Parámetros: Ninguno.")

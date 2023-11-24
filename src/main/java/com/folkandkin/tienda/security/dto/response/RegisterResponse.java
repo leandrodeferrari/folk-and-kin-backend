@@ -1,5 +1,7 @@
 package com.folkandkin.tienda.security.dto.response;
 
+import com.folkandkin.tienda.dto.response.StoreResponse;
+
 import lombok.Data;
 
 /**
@@ -13,4 +15,5 @@ import lombok.Data;
 public class RegisterResponse {
     private String email;
     private String token;
+    private StoreResponse store;
 }

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 CREATE TABLE IF NOT EXISTS tiendas(
 	id BIGINT AUTO_INCREMENT NOT NULL,
 	nombre VARCHAR(20) NOT NULL,
-    logo_url VARCHAR(255) NOT NULL,
+    logo_url VARCHAR(255),
 	usuario_id BIGINT NOT NULL,
     CONSTRAINT PK_tiendas_id PRIMARY KEY(id),
     CONSTRAINT FK_tiendas_usuario_id FOREIGN KEY(usuario_id) REFERENCES folk_and_kin.usuarios(id)

@@ -1,5 +1,7 @@
 package com.folkandkin.tienda.security.service.impl;
 
+import com.folkandkin.tienda.domain.entity.Store;
+import com.folkandkin.tienda.dto.response.StoreResponse;
 import com.folkandkin.tienda.exception.EmailNotFoundException;
 import com.folkandkin.tienda.security.domain.entity.Role;
 import com.folkandkin.tienda.security.domain.entity.User;
@@ -16,6 +18,7 @@ import com.folkandkin.tienda.security.dto.response.RegisterResponse;
 import com.folkandkin.tienda.security.jwt.JwtTokenProvider;
 import com.folkandkin.tienda.security.service.IAuthService;
 import com.folkandkin.tienda.security.service.IRoleService;
+import com.folkandkin.tienda.service.IStoreService;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +27,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,14 +44,16 @@ public class AuthServiceImpl implements IAuthService {
     private final IUserRepository userRepository;
     private final IRegisterMapper registerMapper;
     private final IRoleService roleService;
+    private final IStoreService storeService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    public AuthServiceImpl(AuthenticationManager authManager, UserDetailsServiceImpl userDetailsServiceImpl, IUserRepository userRepository, IRegisterMapper registerMapper, IRoleService roleService, JwtTokenProvider jwtTokenProvider) {
+    public AuthServiceImpl(AuthenticationManager authManager, UserDetailsServiceImpl userDetailsServiceImpl, IUserRepository userRepository, IRegisterMapper registerMapper, IRoleService roleService, IStoreService storeService, JwtTokenProvider jwtTokenProvider) {
         this.authManager = authManager;
         this.userDetailsServiceImpl = userDetailsServiceImpl;
         this.userRepository = userRepository;
         this.registerMapper = registerMapper;
         this.roleService = roleService;
+        this.storeService = storeService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
@@ -62,7 +68,9 @@ public class AuthServiceImpl implements IAuthService {
 
             String token = jwtTokenProvider.generateToken(userDetailsImpl);
 
-            return new LoginResponse(userDetailsImpl.getUsername(), token);
+            List<StoreResponse> stores = this.storeService.findAllByUser(optional.get());
+
+            return new LoginResponse(userDetailsImpl.getUsername(), token, stores);
         } else {
             throw new EmailNotFoundException("No existe usuario con el email ingresado.");
         }
@@ -77,7 +85,15 @@ public class AuthServiceImpl implements IAuthService {
         user.setRole(role);
         user.setPassword(SecurityConfig.passwordEncoder().encode(user.getPassword()));
 
-        RegisterResponse response = this.registerMapper.mapToDto(this.userRepository.save(user));
+        User user1 = this.userRepository.save(user);
+
+        Store store = new Store();
+        store.setName(request.getStoreName());
+        store.setUser(user1);
+
+        StoreResponse storeResponse = this.storeService.save(store);
+
+        RegisterResponse response = this.registerMapper.mapToDto(user1);
 
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(request.getEmail());
@@ -85,6 +101,7 @@ public class AuthServiceImpl implements IAuthService {
 
         LoginResponse loginResponse = this.login(loginRequest);
         response.setToken(loginResponse.getToken());
+        response.setStore(storeResponse);
 
         return response;
     }

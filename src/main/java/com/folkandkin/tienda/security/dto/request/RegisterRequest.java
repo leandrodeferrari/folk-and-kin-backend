@@ -28,4 +28,8 @@ public class RegisterRequest {
     private String password;
 
     private String phone;
+
+    @NotNull(message = "El nombre de la tienda no puede ser nulo.")
+    @NotBlank(message = "El nombre de la tienda no puede estar vacío.")
+    private String storeName;
 }
