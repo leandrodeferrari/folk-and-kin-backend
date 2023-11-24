@@ -3,6 +3,7 @@ package com.folkandkin.tienda.exception.handler;
 import com.folkandkin.tienda.dto.response.ExceptionResponse;
 
 import com.folkandkin.tienda.exception.*;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
@@ -259,6 +260,17 @@ public class ApiControllerAdvice {
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 ex.getMessage(),
                 detail
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse malformedJwtException(MalformedJwtException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
         );
     }
 
