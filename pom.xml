@@ -23,6 +23,7 @@
 		<lombok.mapstruct-binding.version>0.2.0</lombok.mapstruct-binding.version>
 		<openapi.ui.version>1.6.14</openapi.ui.version>
 		<jwt.version>0.11.5</jwt.version>
+		<cloudinary.version>1.27.0</cloudinary.version>
 	</properties>
 
 	<dependencies>
@@ -118,6 +119,11 @@
 			<artifactId>jjwt-impl</artifactId>
 			<version>${jwt.version}</version>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>${cloudinary.version}</version>
 		</dependency>
 	</dependencies>
 

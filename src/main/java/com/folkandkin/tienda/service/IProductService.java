@@ -1,5 +1,6 @@
 package com.folkandkin.tienda.service;
 
+import com.folkandkin.tienda.dto.request.ProductRequest;
 import com.folkandkin.tienda.dto.response.ProductResponse;
 
 import java.util.List;
@@ -14,4 +15,5 @@ import java.util.List;
 public interface IProductService {
     List<ProductResponse> findAll();
     List<ProductResponse> findAllByStoreId(Long storeId);
+    ProductResponse save(ProductRequest request);
 }

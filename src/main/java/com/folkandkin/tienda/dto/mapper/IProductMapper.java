@@ -7,7 +7,6 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,8 +25,4 @@ public interface IProductMapper {
     ProductResponse mapToDto(Product entity);
 
     List<ProductResponse> mapToDto(List<Product> entities);
-
-    default BigDecimal mapToBigDecimal(String price){
-        return new BigDecimal(price);
-    }
 }

@@ -39,7 +39,7 @@ public class Product implements Serializable {
     private Integer stock;
 
     @ManyToOne
-    @JoinColumn(name = "tienda_id", nullable = false)
+    @JoinColumn(name = "tienda_id")
     private Store store;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")

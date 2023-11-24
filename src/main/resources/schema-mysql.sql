@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS productos(
 CREATE TABLE IF NOT EXISTS fotos(
 	id BIGINT AUTO_INCREMENT NOT NULL,
 	url VARCHAR(255) NOT NULL,
-    producto_id BIGINT NOT NULL,
+    producto_id BIGINT,
     CONSTRAINT PK_fotos_id PRIMARY KEY(id),
     CONSTRAINT FK_fotos_producto_id FOREIGN KEY(producto_id) REFERENCES folk_and_kin.productos(id)
 );
