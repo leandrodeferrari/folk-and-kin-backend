@@ -28,7 +28,7 @@ public class Store implements Serializable {
     @Column(length = 20, name = "nombre", nullable = false)
     private String name;
 
-    @Column(name = "logo_url", nullable = false)
+    @Column(name = "logo_url")
     private String logoURL;
 
     @ManyToOne

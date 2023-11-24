@@ -2,7 +2,7 @@ USE folk_and_kin;
 
 -- ROLES
 
-INSERT INTO roles(nombre) VALUES('ADMINISTRADOR');
+INSERT INTO roles(nombre) VALUES('ADMIN');
 
 -- USUARIOS
 
