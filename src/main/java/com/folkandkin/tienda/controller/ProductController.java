@@ -1,6 +1,7 @@
 package com.folkandkin.tienda.controller;
 
 import com.folkandkin.tienda.dto.request.ProductRequest;
+import com.folkandkin.tienda.dto.response.PhotoResponse;
 import com.folkandkin.tienda.dto.response.ProductResponse;
 import com.folkandkin.tienda.service.IProductService;
 
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -54,5 +56,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponse> save(@Valid @RequestBody ProductRequest request){
         return ResponseEntity.status(HttpStatus.CREATED).body(this.productService.save(request));
+    }
+
+    @Operation(description = "Guardar una foto de un producto. Rol: ADMIN. Parámetros: MultipartFile photo.")
+    @PostMapping("/{productId}/photos")
+    public ResponseEntity<PhotoResponse> save(@RequestParam MultipartFile photo,
+                                              @PathVariable("productId") Long productId){
+        return ResponseEntity.ok().body(this.productService.savePhoto(photo, productId));
     }
 }

@@ -266,6 +266,17 @@ public class ApiControllerAdvice {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionResponse photoNotNullException(PhotoNotNullException ex){
+        return new ExceptionResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionResponse malformedJwtException(MalformedJwtException ex){
         return new ExceptionResponse(
                 HttpStatus.BAD_REQUEST.value(),

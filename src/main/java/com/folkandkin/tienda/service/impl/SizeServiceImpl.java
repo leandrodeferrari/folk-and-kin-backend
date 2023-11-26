@@ -59,7 +59,7 @@ public class SizeServiceImpl implements ISizeService {
 
             return this.sizeMapper.mapToDto(this.sizeRepository.save(size));
         } else {
-            throw new SizeExistsException("El talle ya existe.");
+            throw new SizeExistsException("El talle " + request.getName() +  " ya existe.");
         }
     }
 

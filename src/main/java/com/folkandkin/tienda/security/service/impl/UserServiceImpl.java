@@ -3,8 +3,8 @@ package com.folkandkin.tienda.security.service.impl;
 import com.folkandkin.tienda.exception.PasswordNotMatchException;
 import com.folkandkin.tienda.security.config.SecurityConfig;
 import com.folkandkin.tienda.security.domain.entity.User;
-import com.folkandkin.tienda.security.dto.request.ForgotPasswordRequest;
-import com.folkandkin.tienda.security.dto.response.ForgotPasswordResponse;
+import com.folkandkin.tienda.security.dto.request.ChangePasswordRequest;
+import com.folkandkin.tienda.security.dto.response.ChangePasswordResponse;
 import com.folkandkin.tienda.security.repository.IUserRepository;
 import com.folkandkin.tienda.security.service.IUserService;
 
@@ -35,7 +35,7 @@ public class UserServiceImpl implements IUserService {
 
     @Transactional
     @Override
-    public ForgotPasswordResponse resetPassword(ForgotPasswordRequest request) {
+    public ChangePasswordResponse changePassword(ChangePasswordRequest request) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Optional<User> optional = this.userRepository.findByEmail(email);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements IUserService {
 
             if(macthes){
                 user.setPassword(SecurityConfig.passwordEncoder().encode(request.getNewPassword()));
-                return new ForgotPasswordResponse("Cambio de contraseña exitoso");
+                return new ChangePasswordResponse("Cambio de contraseña exitoso");
             } else {
                 throw new PasswordNotMatchException("Contraseña antigua incorrecta.");
             }

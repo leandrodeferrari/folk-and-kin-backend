@@ -72,7 +72,7 @@ public class AuthServiceImpl implements IAuthService {
 
             return new LoginResponse(userDetailsImpl.getUsername(), token, stores);
         } else {
-            throw new EmailNotFoundException("No existe usuario con el email ingresado.");
+            throw new EmailNotFoundException("No existe usuario con el email " + request.getEmail());
         }
     }
 

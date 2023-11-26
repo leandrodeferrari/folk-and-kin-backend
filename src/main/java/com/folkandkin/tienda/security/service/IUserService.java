@@ -1,7 +1,7 @@
 package com.folkandkin.tienda.security.service;
 
-import com.folkandkin.tienda.security.dto.request.ForgotPasswordRequest;
-import com.folkandkin.tienda.security.dto.response.ForgotPasswordResponse;
+import com.folkandkin.tienda.security.dto.request.ChangePasswordRequest;
+import com.folkandkin.tienda.security.dto.response.ChangePasswordResponse;
 
 /**
  * Interfaz para que implemente el objeto de negocio del objeto de dominio Usuario.
@@ -11,5 +11,5 @@ import com.folkandkin.tienda.security.dto.response.ForgotPasswordResponse;
  */
 
 public interface IUserService {
-    ForgotPasswordResponse resetPassword(ForgotPasswordRequest request);
+    ChangePasswordResponse changePassword(ChangePasswordRequest request);
 }

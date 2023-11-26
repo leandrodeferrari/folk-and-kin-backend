@@ -1,7 +1,7 @@
 package com.folkandkin.tienda.security.controller;
 
-import com.folkandkin.tienda.security.dto.request.ForgotPasswordRequest;
-import com.folkandkin.tienda.security.dto.response.ForgotPasswordResponse;
+import com.folkandkin.tienda.security.dto.request.ChangePasswordRequest;
+import com.folkandkin.tienda.security.dto.response.ChangePasswordResponse;
 import com.folkandkin.tienda.security.service.IUserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @Operation(description = "Cambiar contraseña de Usuario. Rol: Autenticado. Parámetros: String oldPassword, String newPassword.")
-    @PatchMapping("/forgot-password")
-    public ResponseEntity<ForgotPasswordResponse> resetPassword(@Valid @RequestBody ForgotPasswordRequest request){
-        return ResponseEntity.ok(this.userService.resetPassword(request));
+    @PatchMapping("/change-password")
+    public ResponseEntity<ChangePasswordResponse> changePassword(@Valid @RequestBody ChangePasswordRequest request){
+        return ResponseEntity.ok(this.userService.changePassword(request));
     }
 }
