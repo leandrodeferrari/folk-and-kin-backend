@@ -35,7 +35,7 @@ public class ProductRequest {
     private List<MultipartFile> photos;
 
     @NotNull(message = "Los IDs de las categorías no pueden ser nulos.")
-    private List<Integer> categoriesId;
+    private List<String> categoriesName;
 
     private List<ColorProductRequest> colors;
 

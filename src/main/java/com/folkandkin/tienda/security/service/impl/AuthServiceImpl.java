@@ -27,6 +27,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -101,7 +102,9 @@ public class AuthServiceImpl implements IAuthService {
 
         LoginResponse loginResponse = this.login(loginRequest);
         response.setToken(loginResponse.getToken());
-        response.setStore(storeResponse);
+        List<StoreResponse> stores = new ArrayList<>();
+        stores.add(storeResponse);
+        response.setStores(stores);
 
         return response;
     }

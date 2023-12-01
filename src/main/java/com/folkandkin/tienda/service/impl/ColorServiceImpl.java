@@ -52,4 +52,10 @@ public class ColorServiceImpl implements IColorService {
 
         return this.colorMapper.mapToDto(this.colorRepository.save(this.colorMapper.mapToEntity(request)));
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Color> findByName(String colorName) {
+        return this.colorRepository.findByName(colorName);
+    }
 }

@@ -18,4 +18,5 @@ public interface IColorService {
     Optional<Color> findById(Integer id);
     List<ColorResponse> findAll();
     ColorResponse save(ColorRequest request);
+    Optional<Color> findByName(String colorName);
 }
