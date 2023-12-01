@@ -68,4 +68,10 @@ public class SizeServiceImpl implements ISizeService {
     public Optional<Size> findById(Integer id) {
         return this.sizeRepository.findById(id);
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Size> findByName(String sizeName) {
+        return this.sizeRepository.findByName(sizeName);
+    }
 }

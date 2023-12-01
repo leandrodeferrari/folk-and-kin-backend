@@ -5,6 +5,7 @@ import com.folkandkin.tienda.dto.request.CategoryRequest;
 import com.folkandkin.tienda.dto.response.CategoryResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interfaz para que implemente el objeto de negocio del objeto de dominio Categoria.
@@ -17,4 +18,5 @@ public interface ICategoryService {
     List<CategoryResponse> findAll();
     CategoryResponse save(CategoryRequest request);
     List<Category> findAllById(List<Integer> categoriesId);
+    Optional<Category> findByName(String categoryName);
 }

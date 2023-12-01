@@ -98,9 +98,15 @@ public class ProductServiceImpl implements IProductService {
                 product.setPhotos(photos);
             }
 
-            if (!request.getCategoriesId().isEmpty()) {
-                List<Category> categories = this.categoryService
-                        .findAllById(request.getCategoriesId());
+            if (!request.getCategoriesName().isEmpty()) {
+                List<Category> categories = new ArrayList<>();
+
+                request.getCategoriesName().forEach(category -> {
+                    Optional<Category> optionalCategory = this.categoryService
+                            .findByName(category);
+
+                    optionalCategory.ifPresent(categories::add);
+                });
 
                 product.setCategories(categories);
 
@@ -110,7 +116,7 @@ public class ProductServiceImpl implements IProductService {
                     List<ColorProduct> colorsProduct = new ArrayList<>();
 
                     request.getColors().forEach(c -> {
-                        Optional<Color> optionalColor = this.colorService.findById(c.getColorId());
+                        Optional<Color> optionalColor = this.colorService.findByName(c.getColorName());
 
                         if (optionalColor.isPresent()) {
                             Color color = optionalColor.get();
@@ -126,7 +132,7 @@ public class ProductServiceImpl implements IProductService {
                     List<SizeProduct> sizesProduct = new ArrayList<>();
 
                     request.getSizes().forEach(s -> {
-                        Optional<Size> optionalSize = this.sizeService.findById(s.getSizeId());
+                        Optional<Size> optionalSize = this.sizeService.findByName(s.getSizeName());
 
                         if (optionalSize.isPresent()) {
                             Size size = optionalSize.get();

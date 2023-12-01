@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Clase de objeto de negocio del objeto de dominio Categoria.
@@ -50,5 +51,11 @@ public class CategoryServiceImpl implements ICategoryService {
     @Override
     public List<Category> findAllById(List<Integer> ids) {
         return this.categoryRepository.findAllById(ids);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<Category> findByName(String categoryName) {
+        return this.categoryRepository.findByName(categoryName);
     }
 }

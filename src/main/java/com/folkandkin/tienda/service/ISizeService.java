@@ -18,4 +18,5 @@ public interface ISizeService {
     List<SizeResponse> findAll();
     SizeResponse save(SizeRequest request);
     Optional<Size> findById(Integer sizeId);
+    Optional<Size> findByName(String sizeName);
 }

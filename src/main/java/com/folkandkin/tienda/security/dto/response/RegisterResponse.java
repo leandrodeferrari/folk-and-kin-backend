@@ -4,6 +4,8 @@ import com.folkandkin.tienda.dto.response.StoreResponse;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Clase que representa la respuesta envidada para el Cliente, para el Registro.
  *
@@ -15,5 +17,5 @@ import lombok.Data;
 public class RegisterResponse {
     private String email;
     private String token;
-    private StoreResponse store;
+    private List<StoreResponse> stores;
 }
